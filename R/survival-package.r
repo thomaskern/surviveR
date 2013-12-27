@@ -1,4 +1,5 @@
 hazard.ratio = function(n,c) log(n)/log(c)
+hazard.diff = function(n,c) log(n)-log(c)
 z = function(n) qnorm(1-n)
 num.req.events = function(alpha,beta,r,theta){
   denominator = r / (1+r)^2 * log(theta)^2
@@ -51,4 +52,16 @@ freedman = function(s.c,s.n,n.c,loss,alpha,beta,s){
   a = d*(1+r)
   b = (r*m(s.n) + m(s.c)) * m(loss)
   a/b
+}
+
+rubinstein = function(eta.c,eta.e,alpha,beta,lambda.c,lambda.e,s,p.e,p.c,R,t){
+  e = function(p,l,eta){
+    f = function(x) exp(-s*x)
+    s = (l+eta)
+    prod(l/s,
+         1-(f(t-R)-f(t))/(s*R))
+  }
+  a = (z(alpha/s) + z(beta))/hazard.diff(lambda.c,lambda.e)
+  prod(a^2,
+       1/e(p.c,lambda.c,eta.c)+1/e(p.e,lambda.e,eta.e))
 }

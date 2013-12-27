@@ -31,5 +31,11 @@ test_that("freedman works",{
           expect_equal(freedman(8,10,8,0.4,0.9,0.3,1),-0.001406407,tolerance=0.002)
           })
 
+test_that("rubinstein works",{
+          expect_equal(rubinstein(8,10,0.3,0.4,0.9,0.3,1,8,1,8,9),22.20966,tolerance=0.2)
+          })
+
+
+
 
 
