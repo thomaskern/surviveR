@@ -31,10 +31,24 @@ lachin = function(n.c,n.e,lambda.c,lambda.e,eta.c,eta.e,gamma,alpha,beta,s,t,R){
   lambda.mean = q.c*lambda.c + q.e*lambda.e
 
   total = function(l.1,l.2) sqrt(var.lik(l.1,eta.e,gamma,R,t)*div(q.e) +
-                               var.lik(l.2,eta.c,gamma,R,t)*div(q.c))
+                                 var.lik(l.2,eta.c,gamma,R,t)*div(q.c))
 
   a = z(alpha) * total(lambda.mean,lambda.mean)
   b = z(beta) * total(lambda.e,lambda.c)
   c = (lambda.c-lambda.e)^2
   (a + b)/c
+}
+
+
+freedman = function(s.c,s.n,n.c,loss,alpha,beta,s){
+  stopifnot(s %in% 1:2)
+  r = (1-n.c)/n.c
+  m = function(l) 1 - l
+  d = prod((r*hazard.ratio(s.n,s.c) + 1)^2,
+         (z(1-alpha/s) + z(1-beta))^2)/
+    (r*(hazard.ratio(s.n,s.c)-1))
+
+  a = d*(1+r)
+  b = (r*m(s.n) + m(s.c)) * m(loss)
+  a/b
 }

@@ -27,4 +27,9 @@ test_that("lachin works",{
           expect_equal(lachin(n.c,n.e,lambda.c,lambda.e,0,0,g,alpha_,beta_,S,t_,R),125.1571,tolerance=0.002)
           })
 
+test_that("freedman works",{
+          expect_equal(freedman(8,10,8,0.4,0.9,0.3,1),-0.001406407,tolerance=0.002)
+          })
+
+
 
