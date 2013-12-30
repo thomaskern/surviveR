@@ -55,6 +55,7 @@ freedman = function(s.c,s.n,n.c,loss,alpha,beta,s){
 }
 
 rubinstein = function(eta.c,eta.e,alpha,beta,lambda.c,lambda.e,s,p.e,p.c,R,t){
+  stopifnot(s %in% 1:2)
   e = function(p,l,eta){
     f = function(x) exp(-s*x)
     s = (l+eta)
